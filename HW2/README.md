@@ -1,5 +1,8 @@
 # HW2: Kelvin–Helmholtz finite-volume simulation
 
+## Overview
+A 2D compressible Euler solver (MUSCL–Hancock with a Rusanov flux) that simulates the Kelvin–Helmholtz instability in a periodic unit box. The code is in `kh_sim.py`. The notebook `KH_finite_volume.ipynb` shows the evolution (movie and snapshots), the resolution and slope-limiter comparison, and a growth-rate test against linear theory (measured 4.56 at N=512 vs. theory 5.92). The 2-page write-up is `AFD_HW2_KH_report.pdf`.
+
 ## Files
 | File | What it is |
 |---|---|
@@ -11,20 +14,6 @@
 | `AFD_HW2_KH_report.pdf` / `report.tex` | The 2-page report and its LaTeX source |
 | `kh_movie.mp4` / `kh_movie.gif` | The movie (regenerated when you run the notebook) |
 
-## Run it in VS Code
-1. **Open the folder.** File → Open Folder… → this `HW2` folder. Open it as the workspace, not just the notebook file, so `import kh_sim` and `results.pkl` are found.
-2. **Extensions.** Install **Python** and **Jupyter** (both by Microsoft) if you don't have them.
-3. **Make an environment** (one time), in VS Code's terminal (Terminal → New Terminal):
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   pip install -r requirements.txt
-   ```
-   Conda works too: `conda create -n kh python numpy matplotlib pillow ipykernel`.
-4. **ffmpeg** (for the MP4 movie): `brew install ffmpeg`. If you skip this, see Troubleshooting.
-5. **Pick the kernel.** Open `KH_finite_volume.ipynb`, click **Select Kernel** (top right), and choose the `.venv` (or `kh`) Python.
-6. **Run All** (▶▶ at the top). The whole notebook takes **~1.5 min**. Almost all of that is the N=256 movie run in Section 3.
-
 ## Knobs worth playing with
 - `RECOMPUTE = True` (first code cell) redoes all the N=64–512 runs instead of loading `results.pkl`. Takes ~25 min.
 - Section 3 movie cell: `kh_sim.run(N=256, ...)`. Try `N=128` for a fast (~10 s) run, or `N=512` for a pretty one (~8 min).
@@ -35,13 +24,6 @@
   - `limiter=True`: slope limiter on
   - `courant`: CFL factor (default 0.4; try 1.2 to watch it go unstable)
   - `snap_times`: times at which to save density snapshots
-
-## Troubleshooting
-- **`ModuleNotFoundError: kh_sim`**: VS Code is running from a different directory. Open the HW2 *folder* as the workspace, or add `import sys; sys.path.insert(0, '.')` at the top.
-- **`FileNotFoundError: results.pkl`**: same cause as above, or set `RECOMPUTE = True`.
-- **ffmpeg error in the movie cell**: you don't have ffmpeg. Either `brew install ffmpeg`, or delete the `anim.save('kh_movie.mp4', ...)` line and replace the last line `HTML(anim.to_html5_video())` with `HTML(anim.to_jshtml())`. That gives an interactive player with no ffmpeg needed.
-- **Movie doesn't show in VS Code's viewer**: the GIF cell right below it always works.
-- **iCloud**: if VS Code says a file is missing, it may not be downloaded yet. In Finder, right-click the HW2 folder → *Download Now*.
 
 ## How the code works (one paragraph)
 Each cell stores the averages of mass, x-momentum, y-momentum and energy. The ideal-gas equation of state closes the system. Every step:
