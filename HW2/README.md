@@ -1,7 +1,7 @@
 # HW2: Kelvin–Helmholtz finite-volume simulation
 
 ## Overview
-A 2D compressible Euler solver (MUSCL–Hancock with a Rusanov flux) that simulates the Kelvin–Helmholtz instability in a periodic unit box. The code is in `kh_sim.py`. The notebook `KH_finite_volume.ipynb` shows the evolution (movie and snapshots), the resolution and slope-limiter comparison, and a growth-rate test against linear theory (measured 4.56 at N=512 vs. theory 5.92). The 2-page write-up is `AFD_HW2_KH_report.pdf`.
+A 2D compressible Euler solver (MUSCL–Hancock with a Rusanov flux) that simulates the Kelvin–Helmholtz instability in a periodic unit box. The code is in `kh_sim.py`. The notebook `KH_finite_volume.ipynb` shows the evolution (movie and snapshots), the resolution and slope-limiter comparison, and a growth-rate test against linear theory (measured 4.56 at N=512 vs. theory 5.92).
 
 ## Files
 | File | What it is |
@@ -10,8 +10,7 @@ A 2D compressible Euler solver (MUSCL–Hancock with a Rusanov flux) that simula
 | `kh_sim.py` | The solver (MUSCL–Hancock + Rusanov flux). The notebook imports it, so keep it in this folder |
 | `results.pkl` | Saved results of the long runs (N = 64–512). The notebook loads this instead of rerunning them |
 | `experiments.py` | Script that produced `results.pkl` (~25 min) |
-| `figures.py` | Script that made `fig_density.png` and `fig_growth.png` for the report |
-| `AFD_HW2_KH_report.pdf` / `report.tex` | The 2-page report and its LaTeX source |
+| `figures.py` | Script that made `fig_density.png` and `fig_growth.png` |
 | `kh_movie.mp4` / `kh_movie.gif` | The movie (regenerated when you run the notebook) |
 
 ## Knobs worth playing with

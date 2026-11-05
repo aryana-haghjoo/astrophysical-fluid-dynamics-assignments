@@ -4,7 +4,7 @@ Kelvin-Helmholtz instability with a 2D finite-volume (MUSCL-Hancock) Euler solve
 Adapted from Philip Mocz (2020), "Create Your Own Finite Volume Fluid Simulation
 (With Python)", https://github.com/pmocz/finitevolume-python
 Changes from the original: packaged as a function, optional seed amplitude,
-diagnostics (KH mode amplitude, conservation), and snapshot output for a report.
+diagnostics (KH mode amplitude, conservation), and snapshot output.
 
 Scheme, per time step:
   1. conserved -> primitive variables (rho, vx, vy, P)
